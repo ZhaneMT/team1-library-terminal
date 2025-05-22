@@ -12,7 +12,7 @@ using System.Linq;
  *  Your solution must include some kind of a book class with a title, author, status, and due
    date if checked out.
    o Status should be On Shelf or Checked Out (or other statuses you can imagine).
-
+   
  */
 class Book
 {
@@ -28,4 +28,4 @@ class Book
         string due = DueDate.HasValue ? DueDate.Value.ToShortDateString() : "N/A";
         return $"{Title,-30} | {Author,-20} | {onShelfStatus,-12} | Due: {due}";
     }
-}
+}  
