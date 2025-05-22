@@ -102,7 +102,7 @@
            }
            else
            {
-               library = new List<Book>  //Save book list to a file
+               library = new List<Book>  //Save book list to a file. 
                {           
                    new Book { Title = "1984", Author = "George Orwell" },
                    new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien" },
@@ -116,6 +116,9 @@
                    new Book { Title = "The Odyssey", Author = "Homer" },
                    new Book { Title = "Hamlet", Author = "William Shakespeare" },
                    new Book { Title = "Frankenstein", Author = "Mary Shelley" }
+                   
+                   //There are absoulutely no custom constructors in the code
+                   //However, C# automatically creates a default constructor if you don’t write one yourself.
                };
            }
        }
