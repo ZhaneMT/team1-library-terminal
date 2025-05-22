@@ -17,7 +17,9 @@
  * 11. If not, check it out to them and set the due date to 2 weeks from today.
    12. Return a book. (You can decide how that looks/what questions it asks.)
  * 
- */using System;
+ */
+    
+    using System;
    using System.Collections.Generic;
    using System.IO;
    using System.Linq;
@@ -104,6 +106,9 @@
                        // If it fails (bad or missing date), use null instead.
                        // This will hopefully keep our program from crashing if the date is missing or not valid.
                    });
+                   
+                   
+                   
                }
            }
            else
@@ -126,16 +131,28 @@
                    //There are absoulutely no custom constructors in the code
                    //However, C# automatically creates a default constructor if you don’t write one yourself.
                };
+               
+               
+               
            }
        }
-       static void SaveLibrary()
+       static void SaveLibrary()   
+           //This is a method (function) called SaveLibrary.
+           // It saves all the books from our program into a text file.
        {
-           using (StreamWriter sw = new StreamWriter(filePath))
+           using (StreamWriter sw = new StreamWriter(filePath))  
+               //This opens a file to write text into it.
+               // filePath is the name of the file (like "library.txt")
+              
            {
-               foreach (var book in library)
+               foreach (var book in library)   //This goes through every book in our list called library.
                {
                    sw.WriteLine($"{book.Title}|{book.Author}|{book.Status}|{book.DueDate}");
                }
+               
+               
+               
+               
            }
        }
        static void DisplayBooks()   //Show all books
@@ -147,6 +164,9 @@
            {
                Console.WriteLine(book);
            }
+           
+           
+           
        }
        static void SearchByAuthor() //Find books by author name (Shows books that contain the author name.)
        {
@@ -162,6 +182,9 @@
            {
                Console.WriteLine("No books found.");
            }
+           
+           
+           
        }
        static void SearchByTitle() //Find books by title keyword
        {
@@ -178,6 +201,8 @@
                Console.WriteLine("No books found.");
            }
        }
+       
+       
        static void CheckoutBook()  //Borrow a book
        {
            DisplayBooks();
