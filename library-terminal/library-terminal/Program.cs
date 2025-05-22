@@ -90,13 +90,19 @@
            {
                foreach (var line in File.ReadAllLines(filePath))
                {
-                   var parts = line.Split('|');
-                   library.Add(new Book
+                   var parts = line.Split('|');  //This breaks a line of text (like "1984|George Orwell|Checked Out|5/22/2025") into pieces wherever it sees a |.
+                                                 
+                   library.Add(new Book   //This creates a new Book using the data from the parts array, and adds it to the library list.
                    {
                        Title = parts[0],
                        Author = parts[1],
                        Status = parts[2],
                        DueDate = DateTime.TryParse(parts[3], out var date) ? date : null
+                       
+                       //DateTime.TryParse(...) ? date : null: Tries to convert the text into a real date (like "5/22/2025").
+                       // If it works, use that date.
+                       // If it fails (bad or missing date), use null instead.
+                       // This will hopefully keep our program from crashing if the date is missing or not valid.
                    });
                }
            }
