@@ -23,20 +23,34 @@
    using System.Linq;
    class Book
    {
+       
        public string Title { get; set; }
        public string Author { get; set; }
        public string Status { get; set; } = "On Shelf";
        public DateTime? DueDate { get; set; } = null;
+       
+      // Title, Author, Status, DueDate: These are like properties of each book (like name, label, and due date).
+      // Status starts as "On Shelf" by default.
+      // DueDate starts as null (meaning there's no due date unless checked out).
        public override string ToString()
        {
            string due = DueDate.HasValue ? DueDate.Value.ToShortDateString() : "N/A";
            return $"{Title,-30} | {Author,-20} | {Status,-12} | Due: {due}";
        }
+       
+       //If there's a due date, show it. If not, show "N/A".
+       // Makes this a neat, formatted row to show each book in the console.
+       
    }
    class Program
    {
        static List<Book> library = new List<Book>();
        static string filePath = "library.txt";
+       
+       //library: Stores the list of all books.
+       // filePath: The name of the file where books will be saved/loaded.
+       
+       
        static void Main()
        {
            LoadLibrary();
@@ -64,9 +78,13 @@
                }
                Console.WriteLine("\nPress Enter to continue...");
                Console.ReadLine();
+               
+               //This shows a menu, lets the user choose what to do, and loops until they quit. Might change it into an enum instead.
            }
        }
-       static void LoadLibrary()
+       
+       
+       static void LoadLibrary() // Load books from a file or create new ones
        {
            if (File.Exists(filePath))
            {
@@ -84,8 +102,8 @@
            }
            else
            {
-               library = new List<Book>
-               {
+               library = new List<Book>  //Save book list to a file
+               {           
                    new Book { Title = "1984", Author = "George Orwell" },
                    new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien" },
                    new Book { Title = "Pride and Prejudice", Author = "Jane Austen" },
@@ -111,7 +129,7 @@
                }
            }
        }
-       static void DisplayBooks()
+       static void DisplayBooks()   //Show all books
        {
            Console.WriteLine("\nLibrary Catalog:\n");
            Console.WriteLine($"{"Title",-30} | {"Author",-20} | {"Status",-12} | Due Date");
@@ -121,7 +139,7 @@
                Console.WriteLine(book);
            }
        }
-       static void SearchByAuthor()
+       static void SearchByAuthor() //Find books by author name (Shows books that contain the author name.)
        {
            Console.Write("Enter author name: ");
            string author = Console.ReadLine().ToLower();
@@ -136,7 +154,7 @@
                Console.WriteLine("No books found.");
            }
        }
-       static void SearchByTitle()
+       static void SearchByTitle() //Find books by title keyword
        {
            Console.Write("Enter title keyword: ");
            string keyword = Console.ReadLine().ToLower();
@@ -151,7 +169,7 @@
                Console.WriteLine("No books found.");
            }
        }
-       static void CheckoutBook()
+       static void CheckoutBook()  //Borrow a book
        {
            DisplayBooks();
            Console.Write("\nEnter title of the book to check out: ");
@@ -172,7 +190,7 @@
                Console.WriteLine($"You have checked out '{book.Title}'. Due back on {book.DueDate?.ToShortDateString()}.");
            }
        }
-       static void ReturnBook()
+       static void ReturnBook()   // Return a book
        {
            Console.Write("Enter the title of the book to return: ");
            string title = Console.ReadLine().ToLower();
