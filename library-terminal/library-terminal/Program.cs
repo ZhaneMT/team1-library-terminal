@@ -31,6 +31,9 @@
        public string Status { get; set; } = "On Shelf";
        public DateTime? DueDate { get; set; } = null;
        
+       public string Summary { get; set; } = "No summary available.";
+
+       
       // Title, Author, Status, DueDate: These are like properties of each book (like name, label, and due date).
       // Status starts as "On Shelf" by default.
       // DueDate starts as null (meaning there's no due date unless checked out).
@@ -65,7 +68,8 @@
                Console.WriteLine("3. Search by title keyword");
                Console.WriteLine("4. Check out a book");
                Console.WriteLine("5. Return a book");
-               Console.WriteLine("6. Quit");
+               Console.WriteLine("6. View book summary");
+               Console.WriteLine("7. Quit");
                Console.Write("\nChoose an option: ");
                string input = Console.ReadLine();
                switch (input)
@@ -75,7 +79,8 @@
                    case "3": SearchByTitle(); break;
                    case "4": CheckoutBook(); break;
                    case "5": ReturnBook(); break;
-                   case "6": SaveLibrary(); return;
+                   case "6": ViewBookSummary(); break;
+                   case "7": SaveLibrary(); return;
                    default: Console.WriteLine("Invalid option."); break;
                }
                Console.WriteLine("\nPress Enter to continue...");
@@ -99,8 +104,8 @@
                        Title = parts[0],
                        Author = parts[1],
                        Status = parts[2],
-                       DueDate = DateTime.TryParse(parts[3], out var date) ? date : null
-                       
+                       DueDate = DateTime.TryParse(parts[3], out var date) ? date : null,
+                       Summary = parts.Length > 4 ? parts[4] : "No summary available."
                        //DateTime.TryParse(...) ? date : null: Tries to convert the text into a real date (like "5/22/2025").
                        // If it works, use that date.
                        // If it fails (bad or missing date), use null instead.
@@ -115,20 +120,20 @@
            {
                library = new List<Book>  //Save book list to a file. 
                {           
-                   new Book { Title = "1984", Author = "George Orwell" },
-                   new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien" },
-                   new Book { Title = "Pride and Prejudice", Author = "Jane Austen" },
-                   new Book { Title = "The Great Gatsby", Author = "F. Scott Fitzgerald" },
-                   new Book { Title = "To Kill a Mockingbird", Author = "Harper Lee" },
-                   new Book { Title = "The Catcher in the Rye", Author = "J.D. Salinger" },
-                   new Book { Title = "The Lord of the Rings", Author = "J.R.R. Tolkien" },
-                   new Book { Title = "Brave New World", Author = "Aldous Huxley" },
-                   new Book { Title = "Moby Dick", Author = "Herman Melville" },
-                   new Book { Title = "The Odyssey", Author = "Homer" },
-                   new Book { Title = "Hamlet", Author = "William Shakespeare" },
-                   new Book { Title = "Frankenstein", Author = "Mary Shelley" }
+                   new Book { Title = "1984", Author = "George Orwell", Summary = "A dystopian novel about totalitarianism." },
+                   new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien",Summary = "A fantasy adventure story about a hobbit's journey." },
+                   new Book { Title = "Pride and Prejudice", Author = "Jane Austen", Summary = "A romantic novel about manners and marriage." },
+                   new Book { Title = "The Great Gatsby", Author = "F. Scott Fitzgerald", Summary = "A novel about the American dream and high society." },
+                   new Book { Title = "To Kill a Mockingbird", Author = "Harper Lee", Summary = "A novel about racial injustice in the Deep South." },
+                   new Book { Title = "The Catcher in the Rye", Author = "J.D. Salinger", Summary = "A story about teenage angst and alienation." },
+                   new Book { Title = "The Lord of the Rings", Author = "J.R.R. Tolkien",  Summary = "An epic fantasy trilogy about the battle between good and evil." },
+                   new Book { Title = "Brave New World", Author = "Aldous Huxley", Summary = "A dystopian story about a highly controlled future society." },
+                   new Book { Title = "Moby Dick", Author = "Herman Melville", Summary = "A sailor's narrative of the obsessive quest for a giant whale." },
+                   new Book { Title = "The Odyssey", Author = "Homer", Summary = "An ancient epic about a hero's long journey home." },
+                   new Book { Title = "Hamlet", Author = "William Shakespeare", Summary = "A tragedy about a prince seeking revenge for his father." },
+                   new Book { Title = "Frankenstein", Author = "Mary Shelley" ,  Summary = "A gothic novel about a scientist who creates a monster." }
                    
-                   //There are absoulutely no custom constructors in the code
+                   //There are absolutely no custom constructors in the code
                    //However, C# automatically creates a default constructor if you don’t write one yourself.
                };
                
@@ -242,6 +247,23 @@
                book.Status = "On Shelf";
                book.DueDate = null;
                Console.WriteLine($"You have returned '{book.Title}'.");
+           }
+           
+       }
+
+       static void ViewBookSummary()
+       {
+           Console.Write("Enter the title of the book to view the summary: ");
+           string title = Console.ReadLine().ToLower();
+           var book = library.FirstOrDefault(b => b.Title.ToLower() == title);
+           if (book != null)
+           {
+               Console.WriteLine($"\nSummary of '{book.Title}':");
+               Console.WriteLine(book.Summary);
+           }
+           else
+           {
+               Console.WriteLine("Book not found.");
            }
        }
    }
