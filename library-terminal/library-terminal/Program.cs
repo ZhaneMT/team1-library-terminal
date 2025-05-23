@@ -115,13 +115,13 @@
            {
                library = new List<Book>  //Save book list to a file. 
                {           
-                   new Book { Title = "1984", Author = "George Orwell" },
-                   new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien" },
-                   new Book { Title = "Pride and Prejudice", Author = "Jane Austen" },
-                   new Book { Title = "The Great Gatsby", Author = "F. Scott Fitzgerald" },
-                   new Book { Title = "To Kill a Mockingbird", Author = "Harper Lee" },
-                   new Book { Title = "The Catcher in the Rye", Author = "J.D. Salinger" },
-                   new Book { Title = "The Lord of the Rings", Author = "J.R.R. Tolkien" },
+                   new Book { Title = "Children of the Corn", Author = "Stephen King" },
+                   new Book { Title = "The Walking Dead", Author = "Robert Kirkman" },
+                   new Book { Title = "Kindred", Author = "Octavia Butler" },
+                   new Book { Title = "The Glass Castle", Author = "Jeanette Walls" },
+                   new Book { Title = "I Have No Mouth, and I Must Scream", Author = "Harlan Ellison" },
+                   new Book { Title = "Farenheit 451", Author = "Ray Bradbury" },
+                   new Book { Title = "Blood Meridian", Author = "Cormac McCarthy" },
                    new Book { Title = "Brave New World", Author = "Aldous Huxley" },
                    new Book { Title = "Moby Dick", Author = "Herman Melville" },
                    new Book { Title = "The Odyssey", Author = "Homer" },
