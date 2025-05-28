@@ -58,6 +58,7 @@
        
        static void Main()
        {
+           
            LoadLibrary();
            while (true)
            {
@@ -106,7 +107,7 @@
                        Status = parts[2],
                        DueDate = DateTime.TryParse(parts[3], out var date) ? date : null,
                        Summary = parts.Length > 4 ? parts[4] : "No summary available."
-                       //DateTime.TryParse(...) ? date : null: Tries to convert the text into a real date (like "5/22/2025").
+                       //DateTime.TryParse(...) ? date : null, Tries to convert the text into a real date (like "5/22/2025").
                        // If it works, use that date.
                        // If it fails (bad or missing date), use null instead.
                        // This will hopefully keep our program from crashing if the date is missing or not valid.
