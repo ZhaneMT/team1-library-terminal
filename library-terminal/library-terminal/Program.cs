@@ -25,13 +25,23 @@
    using System.Linq;
    class Book
    {
+       //get: lets you read the value.
+       // set: lets you change the value.
        
        public string Title { get; set; }
+       //Makes a public property called Title.
        public string Author { get; set; }
+       //Same as above, but for the author's name.
        public string Status { get; set; } = "On Shelf";
+       //Same idea, but it's starting with a default value: "On Shelf".
+       // We can still change it later
        public DateTime? DueDate { get; set; } = null;
+       //This is a nullable date (DateTime?) for when the book is due.
+       // It's null by default (meaning no due date unless it’s checked out).
        
        public string Summary { get; set; } = "No summary available.";
+       //Holds a description or summary of our books.
+       // Starts off with a default message if nothing is provided.
 
        
       // Title, Author, Status, DueDate: These are like properties of each book (like name, label, and due date).
@@ -58,7 +68,9 @@
        
        static void Main()
        {
-           
+           //So this while (true) loop means:
+           // “Keep repeating this code forever... Until I manually stop it (like with return).”
+           // And that return happens here: Line 96:  case "7": SaveLibrary(); return;
            LoadLibrary();
            while (true)
            {
@@ -88,6 +100,10 @@
                Console.ReadLine();
                
                //This shows a menu, lets the user choose what to do, and loops until they quit. Might change it into an enum instead.
+               //The while true loop lets the menu keep running until the user picks option 7 (Quit).
+               // When that happens, the code does this: SaveLibrary() saves the data.
+               // return exits the program, which stops the loop.
+               //It's like a vending machine that stays on and keeps showing options.
            }
        }
        
@@ -98,8 +114,8 @@
            {
                foreach (var line in File.ReadAllLines(filePath))
                {
-                   var parts = line.Split('|');  //This breaks a line of text (like "1984|George Orwell|Checked Out|5/22/2025") into pieces wherever it sees a |.
-                                                 
+                   var parts = line.Split('|'); //This breaks the line into parts, using the | character as a divider.                          
+                  
                    library.Add(new Book   //This creates a new Book using the data from the parts array, and adds it to the library list.
                    {
                        Title = parts[0],
@@ -135,7 +151,7 @@
                    new Book { Title = "Frankenstein", Author = "Mary Shelley" ,  Summary = "A gothic novel about a scientist who creates a monster." }
                    
                    //There are absolutely no custom constructors in the code
-                   //However, C# automatically creates a default constructor if you don’t write one yourself.
+                   //However, C# automatically creates a default constructor if we don’t write one ourselves.
                };
                
                
@@ -147,11 +163,14 @@
            // It saves all the books from our program into a text file.
        {
            using (StreamWriter sw = new StreamWriter(filePath))  
+               //This line checks: Does a file already exist at the location stored in filePath?
+               // If the file does exist, that means the library has saved book data from before.
                //This opens a file to write text into it.
                // filePath is the name of the file (like "library.txt")
               
            {
                foreach (var book in library)   //This goes through every book in our list called library.
+               
                {
                    sw.WriteLine($"{book.Title}|{book.Author}|{book.Status}|{book.DueDate}");
                }
